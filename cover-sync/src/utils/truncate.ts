@@ -12,7 +12,7 @@ export const truncateWords = (
   // Split into words and count characters
   const words = cleanText.split(" ");
   let currentLength = 0;
-  let truncatedWords = [];
+  const truncatedWords = [];
 
   for (const word of words) {
     if (currentLength + word.length + 1 <= maxLength) {

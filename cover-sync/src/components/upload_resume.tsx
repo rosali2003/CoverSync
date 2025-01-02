@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { TextContent } from "pdfjs-dist/types/src/display/api";
 import * as pdfjsLib from "pdfjs-dist";
 import { truncateWords } from "../utils/truncate";
 
@@ -30,6 +31,7 @@ export const ResumeUploader = ({ onResumeProcessed }: ResumeUploaderProps) => {
     if (selectedFile && selectedFile.type === "application/pdf") {
       setFile(selectedFile);
       setStatus("");
+      console.log("selectedFile", file);
       await handlePdfParse(selectedFile);
     } else {
       setFile(null);
@@ -39,6 +41,7 @@ export const ResumeUploader = ({ onResumeProcessed }: ResumeUploaderProps) => {
 
   const handlePdfParse = async (pdfFile: File) => {
     setIsProcessing(true);
+    console.log("Is processing", isProcessing);
     setStatus("Processing PDF...");
 
     try {
@@ -49,9 +52,9 @@ export const ResumeUploader = ({ onResumeProcessed }: ResumeUploaderProps) => {
       // Extract text from each page
       for (let i = 1; i <= pdf.numPages; i++) {
         const page = await pdf.getPage(i);
-        const textContent = await page.getTextContent();
+        const textContent = (await page.getTextContent()) as TextContent;
         const pageText = textContent.items
-          .map((item: any) => item.str)
+          .map((item) => ("str" in item ? item.str : ""))
           .join(" ");
         fullText += pageText + "\n";
       }

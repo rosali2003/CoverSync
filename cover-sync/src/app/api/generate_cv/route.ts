@@ -1,17 +1,17 @@
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { fetchPageContent } from "../crawl/parse_page/route";
-import { crawlPage } from "../crawl/crawler/route";
+import { fetchPageContent } from "../lib/utils/pageParser";
+import { crawlPage } from "../lib/utils/crawler";
 
 // Initialize Gemini
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "");
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
 
-function ensureValidUrl(urlString: string): string {
+function ensureValidUrl(urlString: string): URL {
   if (!urlString.startsWith("http://") && !urlString.startsWith("https://")) {
-    return `https://${urlString}`;
+    return new URL(`https://${urlString}`);
   }
-  return urlString;
+  return new URL(urlString);
 }
 
 interface PageContents {
@@ -95,9 +95,9 @@ export async function POST(request: Request) {
     const { company_applying_for, resumeText } = await request.json();
     console.log("resume text", resumeText);
     console.log("url", company_applying_for);
-    const url = new URL(company_applying_for);
+    const url = ensureValidUrl(company_applying_for);
     const paths = await foundPaths(url);
-    let pageContents: PageContents = {};
+    const pageContents: PageContents = {};
 
     if (paths) {
       for (const path of paths) {
