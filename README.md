@@ -1,1 +1,3 @@
 # CoverSync
+
+deploying to vercel
