@@ -1,5 +1,9 @@
 import {CoverLetterGenerator } from "@/components/input_form"
 
 export default function Home() {
-  return <CoverLetterGenerator />
+  return (
+    <main>
+      <CoverLetterGenerator />
+    </main>
+  )
 }
