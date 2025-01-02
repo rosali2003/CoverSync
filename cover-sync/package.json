@@ -9,11 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "@radix-ui/react-slot": "^1.1.1",
+    "@types/pdfjs-dist": "^2.10.377",
+    "@types/url-parse": "^1.4.11",
     "cheerio": "^1.0.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "langchain": "^0.3.9",
+    "lucide-react": "^0.469.0",
     "next": "15.0.3",
     "openai": "^4.76.0",
+    "pdf-parse": "^1.1.1",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7",
+    "url-parse": "^1.5.10"
   },
   "devDependencies": {
     "@types/node": "^20",

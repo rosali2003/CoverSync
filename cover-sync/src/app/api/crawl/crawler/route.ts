@@ -4,6 +4,7 @@ import * as cheerio from 'cheerio'
 const seenUrls = new Set<string>()
 
 export const crawlPage = async (baseUrl: string, currentUrl: string): Promise<string[]> =>   {
+  console.log('crawling page', currentUrl)
   try {
     const response = await fetch(currentUrl, {
       headers: {
